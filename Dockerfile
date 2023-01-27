@@ -14,8 +14,7 @@ RUN yarn config set registry $VERDACCIO_BUILD_REGISTRY && \
 
 
 
-FROM verdaccio/verdaccio:4
-LABEL maintainer="https://github.com/bufferoverflow/verdaccio-gitlab"
+FROM verdaccio/verdaccio:5
 
 # Go back to root to be able to install the plugin
 USER root
@@ -23,7 +22,6 @@ USER root
 COPY --from=builder /opt/verdaccio-gitlab-build/build /opt/verdaccio-gitlab/build
 COPY --from=builder /opt/verdaccio-gitlab-build/package.json /opt/verdaccio-gitlab/package.json
 COPY --from=builder /opt/verdaccio-gitlab-build/node_modules /opt/verdaccio-gitlab/node_modules
-
 ADD conf/docker.yaml /verdaccio/conf/config.yaml
 
 # Inherited from parent image
